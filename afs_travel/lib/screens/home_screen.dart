@@ -13,6 +13,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  int _currentTab = 0;
   int _selectedIndex = 0;
 
   final List<IconData> _icons = [
@@ -52,6 +53,26 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF3F5F7),
+      bottomNavigationBar: BottomNavigationBar(
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        currentIndex: _currentTab,
+        onTap: (int value) => setState(() => _currentTab = value),
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.search),
+            label: 'search',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.local_pizza),
+            label: 'pizza',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle_outlined),
+            label: 'account',
+          ),
+        ],
+      ),
       body: SafeArea(
           child: ListView(
         padding: const EdgeInsets.symmetric(vertical: 30.0),

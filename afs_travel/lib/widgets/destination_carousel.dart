@@ -95,53 +95,57 @@ class DestinationCarousel extends StatelessWidget {
                               offset: Offset(0.0, 2.0),
                               blurRadius: 10.0)
                         ]),
-                        child: ClipRRect(
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(20.0)),
-                          child: Stack(children: [
-                            Image(
-                              height: 160.0,
-                              width: 160.0,
-                              image: AssetImage(destination.imageUrl),
-                              fit: BoxFit.cover,
-                            ),
-                            Positioned(
-                              bottom: 10.0,
-                              left: 10.0,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text(
-                                    destination.city,
-                                    style: const TextStyle(
-                                        fontSize: 20.0,
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.white,
-                                        letterSpacing: 1.5),
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: <Widget>[
-                                      const Icon(
-                                        FontAwesomeIcons.locationArrow,
-                                        color: Colors.white,
-                                        size: 12.0,
-                                      ),
-                                      const SizedBox(
-                                        width: 4.0,
-                                      ),
-                                      Text(
-                                        destination.country,
-                                        style: const TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 12.0),
-                                      )
-                                    ],
-                                  )
-                                ],
+                        child: Hero(
+                          tag: destination.imageUrl,
+                          child: ClipRRect(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(20.0)),
+                            child: Stack(children: [
+                              Image(
+                                height: 160.0,
+                                width: 160.0,
+                                image: AssetImage(destination.imageUrl),
+                                fit: BoxFit.cover,
                               ),
-                            ),
-                          ]),
+                              Positioned(
+                                bottom: 10.0,
+                                left: 10.0,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(
+                                      destination.city,
+                                      style: const TextStyle(
+                                          fontSize: 20.0,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.white,
+                                          letterSpacing: 1.5),
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: <Widget>[
+                                        const Icon(
+                                          FontAwesomeIcons.locationArrow,
+                                          color: Colors.white,
+                                          size: 12.0,
+                                        ),
+                                        const SizedBox(
+                                          width: 4.0,
+                                        ),
+                                        Text(
+                                          destination.country,
+                                          style: const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 12.0),
+                                        )
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ]),
+                          ),
                         ),
                       ),
                     ]),
