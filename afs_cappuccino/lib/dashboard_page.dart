@@ -1,4 +1,5 @@
 import 'package:afs_cappuccino/color_palette.dart';
+import 'package:afs_cappuccino/widgets/search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
@@ -76,7 +77,9 @@ class _DashboardPageState extends State<DashboardPage> {
                     fontSize: 40.0,
                   ),
                 ),
-              )
+              ),
+              const SizedBox(height: 20.0),
+              const CSearchBar()
             ],
           )
         ],
