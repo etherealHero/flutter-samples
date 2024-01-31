@@ -36,7 +36,7 @@ class _CSearchBarState extends State<CSearchBar> {
             fillColor: ColorPalette().searchBarFill,
             hintText: 'Find Your Coffee...',
             hintStyle: GoogleFonts.sourceSans3(
-              color: ColorPalette().searchBarColor,
+              color: ColorPalette().secondaryColor,
             ),
             prefixIcon: Padding(
               padding: const EdgeInsets.only(
@@ -45,16 +45,16 @@ class _CSearchBarState extends State<CSearchBar> {
               ),
               child: Iconify(
                 IconPark.search,
-                color: ColorPalette().searchBarColor,
+                color: ColorPalette().secondaryColor,
               ),
             ),
-            prefixIconColor: ColorPalette().searchBarColor,
+            prefixIconColor: ColorPalette().secondaryColor,
             prefixIconConstraints: const BoxConstraints(
               maxWidth: 40.0,
               maxHeight: 20.0,
             ),
           ),
-          style: GoogleFonts.sourceSans3(color: ColorPalette().searchBarColor),
+          style: GoogleFonts.sourceSans3(color: ColorPalette().secondaryColor),
         ),
       ),
     );

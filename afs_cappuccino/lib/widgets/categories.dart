@@ -17,8 +17,7 @@ class _CategoriesState extends State<Categories> {
     "Flat White"
   ];
 
-  final int selectedIndex = 0;
-  // 0xFF0D0F14 fcont color
+  int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +43,17 @@ class _CategoriesState extends State<Categories> {
             children: coffeTypes
                 .asMap()
                 .entries
-                .map((e) => CoffeeType(type: e.value, index: e.key))
+                .map(
+                  (e) => GestureDetector(
+                      onTap: () => setState(() {
+                            selectedIndex = e.key;
+                          }),
+                      child: CoffeeType(
+                        type: e.value,
+                        index: e.key,
+                        isMark: e.key == selectedIndex,
+                      )),
+                )
                 .toList(),
           ),
         ),
@@ -54,8 +63,14 @@ class _CategoriesState extends State<Categories> {
 }
 
 class CoffeeType extends StatelessWidget {
-  const CoffeeType({super.key, required this.type, required this.index});
+  const CoffeeType({
+    super.key,
+    required this.type,
+    required this.index,
+    required this.isMark,
+  });
 
+  final bool isMark;
   final String type;
   final int index;
 
@@ -70,7 +85,9 @@ class CoffeeType extends StatelessWidget {
         children: [
           Text(type,
               style: GoogleFonts.sourceSans3(
-                color: ColorPalette().accentColor,
+                color: isMark
+                    ? ColorPalette().accentColor
+                    : ColorPalette().secondaryColor,
                 fontWeight: FontWeight.bold,
                 fontSize: 18.0,
               )),
@@ -82,7 +99,7 @@ class CoffeeType extends StatelessWidget {
             height: 6.0,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(3.0),
-              color: ColorPalette().accentColor,
+              color: isMark ? ColorPalette().accentColor : Colors.transparent,
             ),
           )
         ],
