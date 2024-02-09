@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:afs_cappuccino/color_palette.dart';
 import 'package:afs_cappuccino/widgets/categories.dart';
+import 'package:afs_cappuccino/widgets/coffee_carousel.dart';
 import 'package:afs_cappuccino/widgets/header_nav.dart';
 import 'package:afs_cappuccino/widgets/search_bar.dart';
 import 'package:afs_cappuccino/widgets/header_title.dart';
@@ -59,7 +60,8 @@ class _DashboardPageState extends State<DashboardPage> {
               HeaderTitle(),
               SizedBox(height: 20.0),
               CSearchBar(),
-              Categories()
+              Categories(),
+              CoffeeCarousel()
             ],
           )
         ],

@@ -37,7 +37,7 @@ class _CategoriesState extends State<Categories> {
         },
         blendMode: BlendMode.dstIn,
         child: SizedBox(
-          height: 100.0,
+          height: 65.0,
           child: ListView(
             scrollDirection: Axis.horizontal,
             children: coffeTypes
