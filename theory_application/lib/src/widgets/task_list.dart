@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:theory_application/src/components/round_checkbox.dart';
+import '/src/layout_settings.dart';
+import '/src/components/round_checkbox.dart';
 
 class TaskList extends StatelessWidget {
   const TaskList({super.key});
@@ -22,7 +23,11 @@ class TaskList extends StatelessWidget {
         Container(
             padding:
                 const EdgeInsets.symmetric(vertical: 18.0, horizontal: 18.0),
-            margin: const EdgeInsets.only(left: 16, right: 16, bottom: 6.0),
+            margin: EdgeInsets.only(
+              left: const PagePadding().left,
+              right: const PagePadding().right,
+              bottom: 6.0,
+            ),
             width: double.maxFinite,
             decoration: const BoxDecoration(
               color: Color(0xFF041955),

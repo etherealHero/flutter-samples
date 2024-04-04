@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../layout_settings.dart';
 
 class ListTitle extends StatelessWidget {
   const ListTitle(
@@ -11,7 +12,7 @@ class ListTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 16.0),
+      padding: const PagePadding(),
       child: Text(
         text.toUpperCase(),
         style: const TextStyle(

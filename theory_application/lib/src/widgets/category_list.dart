@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'components/liniar_progress_bar.dart';
+import '/src/layout_settings.dart';
+import '../components/liniar_progress_bar.dart';
 
 class CategoryList extends StatelessWidget {
   const CategoryList({super.key});
@@ -22,7 +23,7 @@ class CategoryList extends StatelessWidget {
       clipBehavior: Clip.none,
       children: [
         Positioned(
-          left: index == 0 ? 16 + 15 : 15,
+          left: index == 0 ? const PagePadding().left + 15 : 15,
           top: 0,
           width: 200 - 30,
           height: 125 - 10,
@@ -41,9 +42,12 @@ class CategoryList extends StatelessWidget {
           ),
         ),
         Container(
-          padding: const EdgeInsets.symmetric(vertical: 14.0, horizontal: 16.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 14.0),
           width: 200.0,
-          margin: EdgeInsets.only(left: index == 0 ? 16 : 0, right: 16),
+          margin: EdgeInsets.only(
+            left: index == 0 ? const PagePadding().left : 0,
+            right: 16.0,
+          ),
           decoration: const BoxDecoration(
             color: Color(0xFF041955),
             borderRadius: BorderRadius.all(Radius.circular(24.0)),

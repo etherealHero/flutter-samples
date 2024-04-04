@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:theory_application/src/category_list.dart';
-import 'package:theory_application/src/list_title.dart';
-import 'package:theory_application/src/task_list.dart';
+
+import '../layout_settings.dart';
+import '../widgets/category_list.dart';
+import '../components/list_title.dart';
+import '../widgets/task_list.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({
@@ -12,34 +14,47 @@ class MainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         forceMaterialTransparency: true,
         toolbarHeight: 90.0,
-        leading: IconButton(
-          color: const Color(0xFF87a4f0),
-          onPressed: () {},
-          icon: const Icon(Icons.menu_rounded),
+        centerTitle: false,
+        titleSpacing: 0.0,
+        title: Padding(
+          padding: EdgeInsets.only(
+            left: const PagePadding().left - 10,
+            right: const PagePadding().right - 10,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              IconButton(
+                color: const Color(0xFF87a4f0),
+                onPressed: () {},
+                icon: const Icon(Icons.menu_rounded),
+              ),
+              Row(
+                children: [
+                  IconButton(
+                    color: const Color(0xFF87a4f0),
+                    onPressed: () {},
+                    icon: const Icon(Icons.search_rounded),
+                  ),
+                  IconButton(
+                    color: const Color(0xFF87a4f0),
+                    onPressed: () {},
+                    icon: const Icon(Icons.notifications_none_rounded),
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
-        actions: [
-          IconButton(
-            color: const Color(0xFF87a4f0),
-            onPressed: () {},
-            icon: const Icon(Icons.search_rounded),
-          ),
-          IconButton(
-            color: const Color(0xFF87a4f0),
-            onPressed: () {},
-            icon: const Icon(Icons.notifications_none_rounded),
-          ),
-          const SizedBox(
-            width: 8,
-          )
-        ],
       ),
       body: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.0),
+            padding: PagePadding(),
             child: Text(
               'What\'s Up, Olivia!',
               style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
@@ -53,6 +68,23 @@ class MainPage extends StatelessWidget {
           ListTitle('Today\'s tasks'),
           TaskList()
         ],
+      ),
+      floatingActionButton: Container(
+        padding: const EdgeInsets.only(right: 8.0),
+        decoration: BoxDecoration(boxShadow: [
+          BoxShadow(
+            color: const Color(0xFFda07eb).withOpacity(0.35),
+            blurRadius: 18.0,
+            spreadRadius: 2.0,
+            offset: const Offset(-4, 8),
+          )
+        ], borderRadius: BorderRadius.circular(100)),
+        child: FloatingActionButton(
+          onPressed: () {},
+          backgroundColor: const Color(0xFFda07eb),
+          shape: const CircleBorder(),
+          child: const Icon(Icons.add),
+        ),
       ),
     );
   }
