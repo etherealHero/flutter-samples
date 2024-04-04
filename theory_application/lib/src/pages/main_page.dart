@@ -1,14 +1,52 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 
 import '../layout_settings.dart';
 import '../widgets/category_list.dart';
 import '../components/list_title.dart';
 import '../widgets/task_list.dart';
+import 'main_drawer.dart';
 
-class MainPage extends StatelessWidget {
+class MainPage extends StatefulWidget {
   const MainPage({
     super.key,
   });
+
+  @override
+  State<MainPage> createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
+  final _advancedDrawerController = AdvancedDrawerController();
+
+  @override
+  Widget build(BuildContext context) {
+    return AdvancedDrawer(
+      backdrop: Container(
+        width: double.infinity,
+        height: double.infinity,
+        color: const Color(0xFF041955),
+      ),
+      controller: _advancedDrawerController,
+      animationCurve: Curves.easeInOut,
+      animationDuration: const Duration(milliseconds: 300),
+      disabledGestures: true,
+      childDecoration: const BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(36)),
+      ),
+      drawer: MainDrawer(advancedDrawerController: _advancedDrawerController),
+      child: MainScaffold(advancedDrawerController: _advancedDrawerController),
+    );
+  }
+}
+
+class MainScaffold extends StatelessWidget {
+  const MainScaffold({
+    super.key,
+    required AdvancedDrawerController advancedDrawerController,
+  }) : _advancedDrawerController = advancedDrawerController;
+
+  final AdvancedDrawerController _advancedDrawerController;
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +66,8 @@ class MainPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               IconButton(
+                onPressed: _handleMenuButtonPressed,
                 color: const Color(0xFF87a4f0),
-                onPressed: () {},
                 icon: const Icon(Icons.menu_rounded),
               ),
               Row(
@@ -87,5 +125,11 @@ class MainPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _handleMenuButtonPressed() {
+    // NOTICE: Manage Advanced Drawer state through the Controller.
+    // _advancedDrawerController.value = AdvancedDrawerValue.visible();
+    _advancedDrawerController.showDrawer();
   }
 }
