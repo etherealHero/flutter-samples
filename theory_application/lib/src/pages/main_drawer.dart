@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
+import 'package:theory_application/src/widgets/total_tasks_chart.dart';
 
 import '../components/avatar_with_progress.dart';
 
@@ -88,6 +89,7 @@ class MainDrawer extends StatelessWidget {
               title: const Text('Analytics'),
             ),
             const Spacer(),
+            const TotalTasksChart(),
             DefaultTextStyle(
               style: const TextStyle(
                 fontSize: 12,
