@@ -43,9 +43,18 @@ class TaskList extends StatelessWidget {
                       : const Color(0xFF183587),
                 ),
                 const SizedBox(width: 16.0),
-                const Text(
-                  'Lorem ipsum dolor est',
-                  style: TextStyle(fontSize: 16),
+                Text(
+                  index % 3 == 0
+                      ? 'Daily meeting with team'
+                      : index % 3 == 1
+                          ? 'Pay for rent'
+                          : 'Check emails',
+                  style: TextStyle(
+                    fontSize: 16,
+                    decoration: index % 2 == 0
+                        ? TextDecoration.lineThrough
+                        : TextDecoration.none,
+                  ),
                 )
               ],
             )),

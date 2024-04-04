@@ -52,29 +52,33 @@ class CategoryList extends StatelessWidget {
             color: Color(0xFF041955),
             borderRadius: BorderRadius.all(Radius.circular(24.0)),
           ),
-          child: const Column(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                '40 tasks',
-                style: TextStyle(
+                '${index % 2 == 0 ? 40 : 18} tasks',
+                style: const TextStyle(
                   color: Color(0xFF6d7fb6),
                   fontWeight: FontWeight.w500,
                   letterSpacing: 0.8,
                 ),
               ),
               Text(
-                'Business',
-                style: TextStyle(
+                index % 2 == 0 ? 'Business' : 'Personal',
+                style: const TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: 24.0,
                   letterSpacing: 0.8,
                 ),
               ),
-              SizedBox(height: 20.0),
-              LiniarProgressBar(color: Color(0xFFda07eb), percent: 70.0),
-              SizedBox(height: 5.0)
+              const SizedBox(height: 20.0),
+              LiniarProgressBar(
+                  color: index % 2 == 0
+                      ? const Color(0xFFda07eb)
+                      : const Color(0xFF237bff),
+                  percent: index % 2 == 0 ? 70 : 30),
+              const SizedBox(height: 5.0)
             ],
           ),
         ),
