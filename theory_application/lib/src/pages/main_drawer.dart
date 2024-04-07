@@ -18,7 +18,7 @@ class MainDrawer extends StatelessWidget {
       child: ListTileTheme(
         textColor: Colors.white,
         iconColor: Colors.white,
-        contentPadding: const EdgeInsets.only(left: 40.0),
+        contentPadding: const EdgeInsets.only(left: 50.0),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,18 +46,18 @@ class MainDrawer extends StatelessWidget {
 
             // Avatar
             const Padding(
-              padding: EdgeInsets.only(left: 33.0),
+              padding: EdgeInsets.only(left: 43.0),
               child: AvatarWithProgress(percent: 40),
             ),
             const SizedBox(height: 10.0),
 
             // UserName
             const Padding(
-              padding: EdgeInsets.only(left: 40.0),
+              padding: EdgeInsets.only(left: 50.0),
               child: Text(
                 'Olivia\nMitchell',
                 style: TextStyle(
-                  fontSize: 30.0,
+                  fontSize: 26.0,
                   fontWeight: FontWeight.w600,
                   height: 1.35,
                 ),
@@ -89,15 +89,29 @@ class MainDrawer extends StatelessWidget {
               title: const Text('Analytics'),
             ),
             const Spacer(),
-            const TotalTasksChart(),
-            DefaultTextStyle(
-              style: const TextStyle(
-                fontSize: 12,
-                color: Colors.white54,
-              ),
-              child: Container(
-                margin: const EdgeInsets.only(bottom: 16.0, left: 40.0),
-                child: const Text('Terms of Service | Privacy Policy'),
+            const Padding(
+              padding: EdgeInsets.only(left: 50.0, right: 20.0),
+              child: TotalTasksChart(),
+            ),
+            const Padding(
+              padding: EdgeInsets.only(left: 50.0, bottom: 70.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Good',
+                    style: TextStyle(
+                      color: Color(0xFF3f5598),
+                    ),
+                  ),
+                  Text(
+                    'Consistancy',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 20.0,
+                    ),
+                  ),
+                ],
               ),
             ),
           ],

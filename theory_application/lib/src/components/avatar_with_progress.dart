@@ -8,7 +8,7 @@ class AvatarWithProgress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const radius = 38;
+    const radius = 34;
 
     return Stack(
       children: [
