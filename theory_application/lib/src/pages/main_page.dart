@@ -6,6 +6,7 @@ import '../widgets/category_list.dart';
 import '../components/list_title.dart';
 import '../widgets/task_list.dart';
 import 'main_drawer.dart';
+import 'add_task_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({
@@ -118,9 +119,15 @@ class MainScaffold extends StatelessWidget {
           )
         ], borderRadius: BorderRadius.circular(100)),
         child: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const AddTaskPage()),
+            );
+          },
           backgroundColor: const Color(0xFFda07eb),
           shape: const CircleBorder(),
+          heroTag: null,
           child: const Icon(Icons.add),
         ),
       ),

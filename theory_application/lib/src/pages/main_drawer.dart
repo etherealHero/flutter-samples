@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
-import 'package:theory_application/src/widgets/total_tasks_chart.dart';
 
 import '../components/avatar_with_progress.dart';
+import '../widgets/total_tasks_chart.dart';
 
 class MainDrawer extends StatelessWidget {
   const MainDrawer({
@@ -35,6 +35,7 @@ class MainDrawer extends StatelessWidget {
                   elevation: 0.0,
                   shape: const StadiumBorder(
                       side: BorderSide(color: Color(0xFF1f336e), width: 2)),
+                  heroTag: null,
                   child: const Icon(
                     Icons.arrow_back_ios_new_rounded,
                     size: 16.0,
