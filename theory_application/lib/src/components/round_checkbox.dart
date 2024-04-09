@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-///Widget that draw a beautiful checkbox rounded. Provided with animation if wanted
 class RoundCheckBox extends StatefulWidget {
   const RoundCheckBox({
     super.key,

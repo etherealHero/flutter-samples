@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 
 import 'src/pages/main_page.dart';
+import 'src/services/isar_service.dart';
 
 class App extends StatelessWidget {
-  const App({
+  App({
     super.key,
   });
+
+  final _service = IsarService();
+
+  static IsarService repository(BuildContext context) {
+    return context.findAncestorWidgetOfExactType<App>()!._service;
+  }
 
   @override
   Widget build(BuildContext context) {

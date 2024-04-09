@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:theory_application/src/models/app_task.dart';
 
 import '../components/add_task_button.dart';
 import '../components/back_button.dart';
 import '../components/category_point.dart';
 
 class AddTaskPage extends StatelessWidget {
-  const AddTaskPage({super.key});
+  AddTaskPage({super.key});
+
+  final _textController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -19,13 +22,15 @@ class AddTaskPage extends StatelessWidget {
             children: <Widget>[
               const Spacer(),
               const SizedBox(height: 60.0),
-              const TextField(
-                decoration: InputDecoration(
+              TextFormField(
+                controller: _textController,
+                decoration: const InputDecoration(
                     border: InputBorder.none,
                     hintText: 'Enter new task',
                     hintStyle: TextStyle(
                         fontSize: 20.0, fontWeight: FontWeight.normal)),
-                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.normal),
+                style: const TextStyle(
+                    fontSize: 20.0, fontWeight: FontWeight.normal),
                 keyboardType: TextInputType.multiline,
                 maxLines: null,
               ),
@@ -99,10 +104,15 @@ class AddTaskPage extends StatelessWidget {
                 ],
               ),
               const Spacer(),
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  AddTaskButton(),
+                  AddTaskButton(
+                    () => AppTask(
+                      title: _textController.text,
+                      description: "",
+                    ),
+                  ),
                 ],
               ),
               const SizedBox(height: 50.0),

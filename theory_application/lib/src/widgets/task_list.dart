@@ -1,4 +1,8 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+
+import '/app.dart';
+import '../models/app_task.dart';
 import '/src/layout_settings.dart';
 import '/src/components/round_checkbox.dart';
 
@@ -6,17 +10,26 @@ class TaskList extends StatelessWidget {
   const TaskList({super.key});
 
   @override
-  Widget build(BuildContext context) => Expanded(
-        child: ListView.builder(
-          padding: const EdgeInsets.symmetric(vertical: 16.0),
-          shrinkWrap: true,
-          scrollDirection: Axis.vertical,
-          itemCount: 20,
-          itemBuilder: _buildCard,
-        ),
-      );
+  Widget build(BuildContext context) => StreamBuilder<List<AppTask>>(
+      stream: App.repository(context).listenToAppTasks(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+          return Expanded(
+            child: ListView(
+              padding: const EdgeInsets.symmetric(vertical: 16.0),
+              shrinkWrap: true,
+              scrollDirection: Axis.vertical,
+              children: snapshot.data!
+                  .mapIndexed((idx, e) => _buildCard(context, idx, e))
+                  .toList(),
+            ),
+          );
+        } else {
+          return const Center(child: Text('Not tasks'));
+        }
+      });
 
-  Widget? _buildCard(context, index) {
+  Widget _buildCard(BuildContext context, int index, AppTask data) {
     return Stack(
       clipBehavior: Clip.none,
       children: [
@@ -36,25 +49,22 @@ class TaskList extends StatelessWidget {
             child: Row(
               children: <Widget>[
                 RoundCheckBox(
-                  onTap: (v) {},
-                  isChecked: index % 2 == 0 ? true : false,
+                  onTap: (v) =>
+                      App.repository(context).toggleTaskStatus(data.id, v!),
+                  isChecked: data.isDone,
                   checkedColor: index % 3 == 0
                       ? const Color(0xFFda07eb)
                       : const Color(0xFF183587),
                 ),
                 const SizedBox(width: 16.0),
                 Text(
-                  index % 3 == 0
-                      ? 'Daily meeting with team'
-                      : index % 3 == 1
-                          ? 'Pay for rent'
-                          : 'Check emails',
+                  data.title,
                   style: TextStyle(
-                    fontSize: 16,
-                    decoration: index % 2 == 0
-                        ? TextDecoration.lineThrough
-                        : TextDecoration.none,
-                  ),
+                      fontSize: 16,
+                      decoration: data.isDone
+                          ? TextDecoration.lineThrough
+                          : TextDecoration.none,
+                      color: Colors.white.withOpacity(data.isDone ? 0.5 : 1)),
                 )
               ],
             )),

@@ -122,7 +122,7 @@ class MainScaffold extends StatelessWidget {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const AddTaskPage()),
+              MaterialPageRoute(builder: (context) => AddTaskPage()),
             );
           },
           backgroundColor: const Color(0xFFda07eb),

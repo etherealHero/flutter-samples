@@ -1,24 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:collection/collection.dart';
 
+import '/app.dart';
 import '/src/layout_settings.dart';
+import '../models/app_category.dart';
 import '../components/liniar_progress_bar.dart';
 
 class CategoryList extends StatelessWidget {
   const CategoryList({super.key});
 
   @override
-  Widget build(BuildContext context) => LimitedBox(
-        maxHeight: 125 + 32,
-        child: ListView.builder(
-          padding: const EdgeInsets.symmetric(vertical: 16.0),
-          shrinkWrap: true,
-          scrollDirection: Axis.horizontal,
-          itemCount: 20,
-          itemBuilder: _buildCard,
-        ),
-      );
+  Widget build(BuildContext context) {
+    return StreamBuilder<List<AppCategory>>(
+        stream: App.repository(context).listenToAppCategorys(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+            return LimitedBox(
+              maxHeight: 125 + 32,
+              child: ListView(
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                children: snapshot.data!
+                    .mapIndexed((idx, e) => _buildCard(context, idx, e))
+                    .toList(),
+              ),
+            );
+          } else {
+            return const Center(child: Text('Not categories'));
+          }
+        });
+  }
 
-  Widget? _buildCard(context, index) {
+  Widget _buildCard(BuildContext context, int index, AppCategory data) {
     return Stack(
       clipBehavior: Clip.none,
       children: [
@@ -57,7 +71,7 @@ class CategoryList extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                '${index % 2 == 0 ? 40 : 18} tasks',
+                '${data.appTasks.length} tasks',
                 style: const TextStyle(
                   color: Color(0xFF6d7fb6),
                   fontWeight: FontWeight.w500,
@@ -65,7 +79,7 @@ class CategoryList extends StatelessWidget {
                 ),
               ),
               Text(
-                index % 2 == 0 ? 'Business' : 'Personal',
+                data.title,
                 style: const TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: 24.0,
@@ -74,10 +88,9 @@ class CategoryList extends StatelessWidget {
               ),
               const SizedBox(height: 20.0),
               LiniarProgressBar(
-                  color: index % 2 == 0
-                      ? const Color(0xFFda07eb)
-                      : const Color(0xFF237bff),
-                  percent: index % 2 == 0 ? 70 : 30),
+                color: Color(data.color),
+                percent: index % 2 == 0 ? 70 : 30,
+              ),
               const SizedBox(height: 5.0)
             ],
           ),
