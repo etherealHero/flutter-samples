@@ -9,10 +9,12 @@ class AppTask {
   String title;
   String description;
   bool isDone;
+  bool markToDelete;
   final appCategory = IsarLink<AppCategory>();
 
   AppTask({
     required this.title,
     required this.description,
-  }) : isDone = false;
+  })  : isDone = false,
+        markToDelete = false;
 }

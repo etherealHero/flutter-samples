@@ -23,6 +23,7 @@ class AddTaskPage extends StatelessWidget {
               const Spacer(),
               const SizedBox(height: 60.0),
               TextFormField(
+                autofocus: true,
                 controller: _textController,
                 decoration: const InputDecoration(
                     border: InputBorder.none,

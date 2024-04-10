@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
+import 'package:theory_application/src/pages/categories_page.dart';
 
 import '../components/avatar_with_progress.dart';
 import '../widgets/total_tasks_chart.dart';
@@ -74,7 +75,13 @@ class MainDrawer extends StatelessWidget {
               title: const Text('Templates'),
             ),
             ListTile(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SlidableTileExample(),
+                    ));
+              },
               leading: const Icon(
                 Icons.window_outlined,
                 color: Color(0xFF3f5598),

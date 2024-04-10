@@ -14,8 +14,9 @@ class BackButtonOutlined extends StatelessWidget {
       shape: const StadiumBorder(
           side: BorderSide(color: Color(0xFF1f336e), width: 2)),
       heroTag: null,
-      child: const Icon(
+      child: Icon(
         Icons.close_rounded,
+        color: Colors.white.withOpacity(0.8),
         size: 26.0,
       ),
     );

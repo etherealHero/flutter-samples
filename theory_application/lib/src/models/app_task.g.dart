@@ -27,8 +27,13 @@ const AppTaskSchema = CollectionSchema(
       name: r'isDone',
       type: IsarType.bool,
     ),
-    r'title': PropertySchema(
+    r'markToDelete': PropertySchema(
       id: 2,
+      name: r'markToDelete',
+      type: IsarType.bool,
+    ),
+    r'title': PropertySchema(
+      id: 3,
       name: r'title',
       type: IsarType.string,
     )
@@ -73,7 +78,8 @@ void _appTaskSerialize(
 ) {
   writer.writeString(offsets[0], object.description);
   writer.writeBool(offsets[1], object.isDone);
-  writer.writeString(offsets[2], object.title);
+  writer.writeBool(offsets[2], object.markToDelete);
+  writer.writeString(offsets[3], object.title);
 }
 
 AppTask _appTaskDeserialize(
@@ -84,10 +90,11 @@ AppTask _appTaskDeserialize(
 ) {
   final object = AppTask(
     description: reader.readString(offsets[0]),
-    title: reader.readString(offsets[2]),
+    title: reader.readString(offsets[3]),
   );
   object.id = id;
   object.isDone = reader.readBool(offsets[1]);
+  object.markToDelete = reader.readBool(offsets[2]);
   return object;
 }
 
@@ -103,6 +110,8 @@ P _appTaskDeserializeProp<P>(
     case 1:
       return (reader.readBool(offset)) as P;
     case 2:
+      return (reader.readBool(offset)) as P;
+    case 3:
       return (reader.readString(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -393,6 +402,16 @@ extension AppTaskQueryFilter
     });
   }
 
+  QueryBuilder<AppTask, AppTask, QAfterFilterCondition> markToDeleteEqualTo(
+      bool value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'markToDelete',
+        value: value,
+      ));
+    });
+  }
+
   QueryBuilder<AppTask, AppTask, QAfterFilterCondition> titleEqualTo(
     String value, {
     bool caseSensitive = true,
@@ -568,6 +587,18 @@ extension AppTaskQuerySortBy on QueryBuilder<AppTask, AppTask, QSortBy> {
     });
   }
 
+  QueryBuilder<AppTask, AppTask, QAfterSortBy> sortByMarkToDelete() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'markToDelete', Sort.asc);
+    });
+  }
+
+  QueryBuilder<AppTask, AppTask, QAfterSortBy> sortByMarkToDeleteDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'markToDelete', Sort.desc);
+    });
+  }
+
   QueryBuilder<AppTask, AppTask, QAfterSortBy> sortByTitle() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'title', Sort.asc);
@@ -619,6 +650,18 @@ extension AppTaskQuerySortThenBy
     });
   }
 
+  QueryBuilder<AppTask, AppTask, QAfterSortBy> thenByMarkToDelete() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'markToDelete', Sort.asc);
+    });
+  }
+
+  QueryBuilder<AppTask, AppTask, QAfterSortBy> thenByMarkToDeleteDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'markToDelete', Sort.desc);
+    });
+  }
+
   QueryBuilder<AppTask, AppTask, QAfterSortBy> thenByTitle() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'title', Sort.asc);
@@ -647,6 +690,12 @@ extension AppTaskQueryWhereDistinct
     });
   }
 
+  QueryBuilder<AppTask, AppTask, QDistinct> distinctByMarkToDelete() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'markToDelete');
+    });
+  }
+
   QueryBuilder<AppTask, AppTask, QDistinct> distinctByTitle(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -672,6 +721,12 @@ extension AppTaskQueryProperty
   QueryBuilder<AppTask, bool, QQueryOperations> isDoneProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'isDone');
+    });
+  }
+
+  QueryBuilder<AppTask, bool, QQueryOperations> markToDeleteProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'markToDelete');
     });
   }
 

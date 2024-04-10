@@ -1,5 +1,6 @@
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart' as p;
+
 import '../models/app_category.dart';
 import '../models/app_task.dart';
 
@@ -8,6 +9,7 @@ class IsarService {
 
   IsarService() {
     db = openDB();
+    // cleanDb();
   }
 
   // post data
@@ -21,13 +23,28 @@ class IsarService {
     isar.writeTxnSync<int>(() => isar.appTasks.putSync(newAppTask));
   }
 
-  Future<void> toggleTaskStatus(int taskId, bool newStatus) async {
+  Future<void> setTaskDoneStatus(int taskId, bool newStatus) async {
     final isar = await db;
 
     AppTask? task = await isar.appTasks.where().idEqualTo(taskId).findFirst();
 
     isar.writeTxnSync<int>(
         () => isar.appTasks.putSync(task!..isDone = newStatus));
+  }
+
+  Future<void> setTaskMarkToDeleteStatus(int taskId, bool newMark) async {
+    final isar = await db;
+
+    AppTask? task = await isar.appTasks.where().idEqualTo(taskId).findFirst();
+
+    isar.writeTxnSync<int>(
+        () => isar.appTasks.putSync(task!..markToDelete = newMark));
+  }
+
+  Future<bool> removeTask(int taskId) async {
+    final isar = await db;
+
+    return await isar.writeTxn(() => isar.appTasks.delete(taskId));
   }
 
   // get data
@@ -47,6 +64,14 @@ class IsarService {
         .filter()
         .appCategory((q) => q.idEqualTo(category.id))
         .findAll();
+  }
+
+  Future<bool> isAppTaskNeedDelete(int taskId) async {
+    final isar = await db;
+
+    AppTask? task = await isar.appTasks.where().idEqualTo(taskId).findFirst();
+
+    return task!.markToDelete;
   }
 
   // listeners
